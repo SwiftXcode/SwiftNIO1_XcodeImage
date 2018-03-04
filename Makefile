@@ -1,7 +1,7 @@
 # Makefile
 # Copyright © 2018 ZeeZide GmbH. All rights reserved.
 
-include /usr/local/lib/swift-xcode/makefiles/swift-xcode-config.make
+include config.make
 
 PACKAGE = SwiftNIO
 MAJOR=0
@@ -84,6 +84,5 @@ uninstall-project-server-templates :
 		$(XCODE_TEMPLATE_PROJECT_SERVER_SOURCE_DIR)/Swift\ NIO.xctemplate
 
 install-file-server-templates : uninstall-file-server-templates
-	# $(MKDIR_P) $(XCODE_TEMPLATE_FILE_SERVER_SOURCE_DIR)
 
 uninstall-file-server-templates :
