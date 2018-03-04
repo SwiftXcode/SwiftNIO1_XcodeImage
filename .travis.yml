@@ -1,0 +1,20 @@
+language:  generic
+
+notifications:
+  slack:
+    rooms:
+      - apacheexpress:9z2IfvxZfENp0TFmiYCgyUKz
+
+matrix:
+    include:
+        - os:   osx
+          osx_image: xcode9.2
+        - os:   osx
+          osx_image: xcode9.3beta
+
+before_install:
+    - brew update
+    - brew install swiftxcode/swiftxcode/swift-xcode
+
+script:
+    - make

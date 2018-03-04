@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Kind</key>
+    <string>Xcode.Xcode3.ProjectTemplateUnitKind</string>
+    
+    <key>Identifier</key>
+    <string>de.zeezide.dt.unit.swiftxcode.images.swift.nio.core</string>
+
+    <key>Ancestors</key>
+    <array>
+      <string>de.zeezide.dt.unit.spmToolBase</string>
+    </array>
+
+    <key>Concrete</key>
+    <true/>
+
+    <key>Description</key>
+    <string>This template provides a starting point for using the SwiftNIO cross-platform asynchronous event-driven network application framework.</string>
+    
+    <key>Targets</key>
+    <array>
+      <dict>
+        <key>ProductType</key>
+        <string>com.apple.product-type.tool</string>
+        <key>TargetIdentifier</key>
+        <string>com.apple.dt.commandLineToolTarget</string>
+
+        <key>BuildPhases</key>
+        <array>
+          <dict>
+            <key>SortOrder</key><integer>0</integer>
+            <key>Name</key>
+            <string>Build Swift Package Manager Dependencies</string>
+            <key>Class</key>      <string>ShellScript</string>
+            <key>ShellPath</key>  <string>/bin/sh</string>
+            <key>ShellScript</key>
+            <string>SPM_IMAGE=SwiftNIO verbose=no swift xcode build</string>
+          </dict>
+          <dict><key>Class</key><string>Sources</string>   </dict>
+          <dict><key>Class</key><string>Frameworks</string></dict>
+        </array>
+      </dict>
+    </array>
+    
+    <key>Nodes</key>
+    <array>
+      <string>Package.swift:spmpackagedecl:deps:SwiftNIO(url: "https://github.com/apple/swift-nio.git", 
+                 from: "1.0.0")</string>
+      <string>Package.swift:spmpackagedecl:targets:default:NIO</string>
+      
+      <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:imports:import:Foundation</string>
+      <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:imports:import:NIO</string>
+      <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:body:SwiftNIOMain</string>
+    </array>
+    
+    
+    <!-- ***************************************************** -->
+    <!-- TODO: indent, separate out common stuff -->
+    <key>Definitions</key>
+    <dict>
+      <!-- SwiftNIO stuff -->
+      
+      <key>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift</key>
+      <dict>
+        <key>Path</key><string>Sources/main.swift</string>
+      </dict>
+      <key>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:body:SwiftNIOMain</key>
+      <string></string> <!-- TODO: add nice boilerplate -->
+    </dict>
+
+
+    <!-- *************** OPTIONS ********************************* -->
+
+    <key>Options</key>
+    <array>
+      <dict>
+        <key>Identifier</key>   <string>zzSwiftNIOHTTP1</string>
+        <key>Name</key>         <string>Include the SwiftNIO HTTP1 module.</string>
+        <key>Description</key>
+        <string>HTTP/1.x support for Swift NIO.</string>
+        
+        <key>SortOrder</key>    <integer>10</integer>
+        <key>Type</key>         <string>checkbox</string>
+        <key>Default</key>      <string>true</string>
+        <key>NotPersisted</key> <true/>
+        
+        <key>Units</key>
+        <dict>
+          <key>true</key>
+          <array>
+            <dict>
+              <key>Nodes</key>
+              <array>
+                <string>Package.swift:spmpackagedecl:targets:default:NIOHTTP1</string>
+                <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:imports:import:NIOHTTP1</string>
+              </array>
+              
+              <!-- Add a nice main boilerplate w/ HTTP support
+              <key>Definitions</key>
+              <dict>
+                <key>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:body:SwiftNIOMain</key>
+                <string></string>
+              </dict>
+                -->
+            </dict>
+          </array>
+        </dict>
+      </dict>
+      
+      <dict>
+        <key>Identifier</key>   <string>zzSwiftNIOSSL</string>
+        <key>Name</key>         <string>Include the SwiftNIO SSL module.</string>
+        <key>Description</key>
+        <string>OpenSSL based TLS support.</string>
+        
+        <key>SortOrder</key>    <integer>20</integer>
+        <key>Type</key>         <string>checkbox</string>
+        <key>Default</key>      <string>false</string>
+        <key>NotPersisted</key> <true/>
+        
+        <key>Units</key>
+        <dict>
+          <key>true</key>
+          <array>
+            <dict>
+              <key>Nodes</key>
+              <array>
+                <string>Package.swift:spmpackagedecl:deps:SwiftNIOSSL(url: "https://github.com/apple/swift-nio-ssl.git", 
+                 from: "1.0.0")</string>
+                <string>Package.swift:spmpackagedecl:targets:default:NIOOpenSSL</string>
+                <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:imports:import:NIOOpenSSL</string>
+              </array>
+              
+              <!-- Add a nice main boilerplate w/ SSL support
+              <key>Definitions</key>
+              <dict>
+                <key>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:body:SwiftNIOMain</key>
+                <string></string>
+              </dict>
+                -->
+            </dict>
+          </array>
+        </dict>
+      </dict>
+
+    </array>
+  </dict>
+</plist>
