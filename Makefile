@@ -1,10 +1,7 @@
 # Makefile
 # Copyright © 2018 ZeeZide GmbH. All rights reserved.
 
-ifeq ($(prefix),)
-  prefix=/usr/local
-endif
-include $(prefix)/lib/swift-xcode/makefiles/swift-xcode-config.make
+include /usr/local/lib/swift-xcode/makefiles/swift-xcode-config.make
 
 PACKAGE = SwiftNIO
 MAJOR=0
