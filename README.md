@@ -27,9 +27,10 @@ swift xcode link-templates # <-- important!
 
 ### Use within Xcode
 
-Create new project, choose "macOS / Server / Swift NIO" template,
-check desired options,
-build and run, and then have fun!
+1. Create new project (Command-Shift-N or File/New/Project ...)
+2. choose macOS / Server / Swift NIO template
+3. check desired options
+4. build and run, and then have fun!
 
 <img src="http://zeezide.com/img/microexpress-nio/01-new-project.jpg" align="center" />
 
