@@ -1,4 +1,4 @@
-<h2>SwiftXcode Image for SwiftNIO
+<h2>SwiftXcode Image for Swift NIO
   <img src="http://zeezide.com/img/SwiftXcodePkgIcon.svg"
        align="right" width="128" height="128" />
 </h2>
@@ -9,21 +9,32 @@
 [![homebrew](https://img.shields.io/homebrew/v/cake.svg)](https://github.com/SwiftXcode/homebrew-swiftxcode)
 
 SwiftXcode image for
-[SwiftNIO](https://github.com/apple/swift-nio).
+[Swift NIO](https://github.com/apple/swift-nio).
 
-SwiftNIO is a cross-platform asynchronous event-driven network application 
+Swift NIO is a cross-platform asynchronous event-driven network application 
 framework for rapid development of maintainable high performance protocol 
 servers & clients.
 It's like Netty written in Swift.
 
 Check the main project for details: [SwiftXcode](https://SwiftXcode.github.io).
 
-### Install SwiftNIO Image
+### Install Swift NIO Image
 
 ```shell
 brew install swiftxcode/swiftxcode/swift-xcode-nio
 swift xcode link-templates # <-- important!
 ```
+
+### Use within Xcode
+
+Create new project, choose "macOS / Server / Swift NIO" template,
+check desired options,
+build and run, and then have fun!
+
+<img src="http://zeezide.com/img/microexpress-nio/01-new-project.jpg" align="center" />
+
+<img src="http://zeezide.com/img/microexpress-nio/02-new-project.jpg" align="center" />
+
 
 ### Who
 
