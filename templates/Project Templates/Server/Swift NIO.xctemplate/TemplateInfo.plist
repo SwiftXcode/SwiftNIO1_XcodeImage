@@ -50,9 +50,9 @@
                  from: "1.1.0")</string>
       <string>Package.swift:spmpackagedecl:targets:default:NIO</string>
       
-      <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:imports:import:Foundation</string>
-      <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:imports:import:NIO</string>
-      <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:body:SwiftNIOMain</string>
+      <string>Sources/___PACKAGENAME___/main.swift:imports:import:Foundation</string>
+      <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIO</string>
+      <string>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</string>
     </array>
     
     
@@ -62,11 +62,11 @@
     <dict>
       <!-- SwiftNIO stuff -->
       
-      <key>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift</key>
+      <key>Sources/___PACKAGENAME___/main.swift</key>
       <dict>
         <key>Path</key><string>Sources/main.swift</string>
       </dict>
-      <key>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:body:SwiftNIOMain</key>
+      <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
       <string></string> <!-- TODO: add nice boilerplate -->
     </dict>
 
@@ -94,13 +94,13 @@
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:targets:default:NIOHTTP1</string>
-                <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:imports:import:NIOHTTP1</string>
+                <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIOHTTP1</string>
               </array>
               
               <!-- Add a nice main boilerplate w/ HTTP support
               <key>Definitions</key>
               <dict>
-                <key>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:body:SwiftNIOMain</key>
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
                 <string></string>
               </dict>
                 -->
@@ -130,13 +130,13 @@
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIOSSL(url: "https://github.com/apple/swift-nio-ssl.git", 
                  from: "1.0.0")</string>
                 <string>Package.swift:spmpackagedecl:targets:default:NIOOpenSSL</string>
-                <string>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:imports:import:NIOOpenSSL</string>
+                <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIOOpenSSL</string>
               </array>
               
               <!-- Add a nice main boilerplate w/ SSL support
               <key>Definitions</key>
               <dict>
-                <key>Sources/___PACKAGENAMEASIDENTIFIER___/main.swift:body:SwiftNIOMain</key>
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
                 <string></string>
               </dict>
                 -->
