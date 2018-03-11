@@ -145,6 +145,58 @@
         </dict>
       </dict>
 
+      
+      <dict>
+        <key>Identifier</key>   <string>zzSwiftNIOMicroExpress</string>
+        <key>Name</key>         <string>Use µExpress.</string>
+        <key>Description</key>
+        <string>A tiny, Express-like, web framework.</string>
+        
+        <key>SortOrder</key>    <integer>30</integer>
+        <key>Type</key>         <string>checkbox</string>
+        <key>Default</key>      <string>false</string>
+        <key>NotPersisted</key> <true/>
+        
+        <key>Units</key>
+        <dict>
+          <key>true</key>
+          <array>
+            <dict>
+              <key>Nodes</key>
+              <array>
+                <string>Package.swift:spmpackagedecl:deps:SwiftNIOMicroExpress(url: "https://github.com/AlwaysRightInstitute/MicroExpress.git", 
+                 .branch("branches/swift-nio-lib")</string>
+                <string>Package.swift:spmpackagedecl:targets:default:MicroExpress</string>
+                <string>Sources/___PACKAGENAME___/main.swift:imports:import:MicroExpress</string>
+              </array>
+              
+              <key>Definitions</key>
+              <dict>
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
+                <string>let app = Express()
+app.use(querystring,
+        cors(allowOrigin: "*"))
+
+app.use { req, res, next in
+    print("\(req.header.method):", req.header.uri)
+    next()
+}
+
+app.get("/answer") { _, res, _ in
+    res.json([ "answer": 42 ])
+}
+
+app.get { req, res, _ in
+    let text = req.param("text") ?? "Schwifty"
+    res.send("Hello, \(text) world!")
+}
+
+app.listen(1337)</string>
+              </dict>
+            </dict>
+          </array>
+        </dict>
+      </dict>
     </array>
   </dict>
 </plist>

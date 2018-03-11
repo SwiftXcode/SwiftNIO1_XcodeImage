@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "MicroExpress",
+        "repositoryURL": "https://github.com/AlwaysRightInstitute/MicroExpress.git",
+        "state": {
+          "branch": "branches/swift-nio-lib",
+          "revision": "e9648464697fb22fe2c7d39372392597e8b38e14",
+          "version": null
+        }
+      },
+      {
         "package": "swift-nio",
         "repositoryURL": "https://github.com/apple/swift-nio.git",
         "state": {
