@@ -165,7 +165,7 @@
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIOMicroExpress(url: "https://github.com/AlwaysRightInstitute/MicroExpress.git", 
-                 .branch("branches/swift-nio-lib")</string>
+                 .branch("branches/swift-nio-lib"\))</string>
                 <string>Package.swift:spmpackagedecl:targets:default:MicroExpress</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:MicroExpress</string>
               </array>
