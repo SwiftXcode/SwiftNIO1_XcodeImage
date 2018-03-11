@@ -52,6 +52,9 @@
       
       <string>Sources/___PACKAGENAME___/main.swift:imports:import:Foundation</string>
       <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIO</string>
+      <string>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOExpressInit</string>
+      <string>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOExpressCommonRoutes</string>
+      <string>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOExpressCustomRoutes</string>
       <string>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</string>
     </array>
     
@@ -165,28 +168,33 @@
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIOMicroExpress(url: "https://github.com/AlwaysRightInstitute/MicroExpress.git", 
-                 .branch("branches/swift-nio-lib")</string>
+                 .branch("branches/swift-nio-lib"\))</string>
                 <string>Package.swift:spmpackagedecl:targets:default:MicroExpress</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:MicroExpress</string>
               </array>
               
               <key>Definitions</key>
               <dict>
-                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
-                <string>let app = Express()
-app.use(querystring,
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOExpressInit</key>
+                <string>let app = Express()</string>
+                
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOExpressCommonRoutes</key>
+                <string>app.use(querystring,
         cors(allowOrigin: "*"))
-
+        
 app.use { req, res, next in
     print("\(req.header.method):", req.header.uri)
     next()
 }
-
-app.get("/answer") { _, res, _ in
+</string>
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOExpressCustomRoutes</key>
+                <string>app.get("/answer") { _, res, _ in
     res.json([ "answer": 42 ])
 }
+</string>
 
-app.get { req, res, _ in
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
+                <string>app.get { req, res, _ in
     let text = req.param("text") ?? "Schwifty"
     res.send("Hello, \(text) world!")
 }
@@ -197,6 +205,49 @@ app.listen(1337)</string>
           </array>
         </dict>
       </dict>
+
+      <dict>
+        <key>Identifier</key>   <string>zzSPMCows</string>
+        <key>Name</key>
+        <string>Use the excellent SPM "cows" module.</string>
+        <key>Description</key>
+        <string>Add the excellent "cows" module as a Swift Package Manager dependency. That means no less than lots and lots of ASCII cows right at your fingertips!</string>
+        
+  			<key>RequiredOptions</key>
+  			<dict>
+  				<key>zzSwiftNIOMicroExpress</key>
+  				<true/>
+  			</dict>      
+        
+        <key>SortOrder</key>    <integer>40</integer>
+        <key>Type</key>         <string>checkbox</string>
+        <key>Default</key>      <string>false</string>
+        <key>NotPersisted</key> <true/>
+        <key>Units</key>
+        <dict>
+          <key>true</key>
+          <array>
+            <dict>
+              <key>Nodes</key>
+              <array>
+                <string>Package.swift:spmpackagedecl:deps:cows(url: "https://github.com/AlwaysRightInstitute/cows.git",
+                 from: "1.0.0")</string>
+                <string>Package.swift:spmpackagedecl:targets:default:cows</string>
+                <string>Sources/___PACKAGENAME___/main.swift:imports:import:cows</string>
+              </array>
+              <key>Definitions</key>
+              <dict>
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOExpressCustomRoutes</key>
+                <string>app.get("/vaca") { _, res, _ in
+    res.send(cows.vaca())
+}
+</string>
+              </dict>
+            </dict>
+          </array>
+        </dict>
+      </dict>
+      
     </array>
   </dict>
 </plist>
