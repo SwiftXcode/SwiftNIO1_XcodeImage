@@ -12,7 +12,7 @@ let package = Package(
                  from: "1.1.0"),
         .package(url: "https://github.com/apple/swift-nio-ssl.git", 
                  from: "1.0.0"),
-        .package(url: "https://github.com/AlwaysRightInstitute/MicroExpress.git", 
+        .package(url: "https://github.com/NozeIO/MicroExpress.git",
                  .branch("branches/swift-nio-lib"))
     ],
     targets: [

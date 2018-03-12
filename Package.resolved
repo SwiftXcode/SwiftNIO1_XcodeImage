@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "MicroExpress",
-        "repositoryURL": "https://github.com/AlwaysRightInstitute/MicroExpress.git",
+        "repositoryURL": "https://github.com/NozeIO/MicroExpress.git",
         "state": {
           "branch": "branches/swift-nio-lib",
-          "revision": "e9648464697fb22fe2c7d39372392597e8b38e14",
+          "revision": "25ae4b40aaa84921c90fb072b8a505252b160022",
           "version": null
         }
       },
