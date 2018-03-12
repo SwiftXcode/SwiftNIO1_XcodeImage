@@ -46,3 +46,7 @@ We like
 GitHub stars,
 cool [contract work](http://zeezide.com/en/services/services.html),
 presumably any form of praise you can think of.
+
+### Want a Video Tutorial?
+
+<img src="http://zeezide.com/img/swift-nio-cows.gif" />
