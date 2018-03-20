@@ -6,8 +6,17 @@
         "repositoryURL": "https://github.com/NozeIO/MicroExpress.git",
         "state": {
           "branch": "branches/swift-nio-lib",
-          "revision": "9f911bb29db53f85833d287d5e9b80e967f3cdda",
+          "revision": "b3d6c37af7706712c7fb0c5c5a11b8fca3075663",
           "version": null
+        }
+      },
+      {
+        "package": "mustache",
+        "repositoryURL": "https://github.com/AlwaysRightInstitute/mustache.git",
+        "state": {
+          "branch": null,
+          "revision": "37278804d39799bab33835bd4d662e46b603a412",
+          "version": "0.5.4"
         }
       },
       {
