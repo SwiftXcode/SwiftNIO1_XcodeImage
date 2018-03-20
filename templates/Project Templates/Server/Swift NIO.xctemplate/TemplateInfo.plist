@@ -168,6 +168,7 @@
                  .branch("branches/swift-nio-lib"\))</string>
                 <string>Package.swift:spmpackagedecl:targets:default:MicroExpress</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:MicroExpress</string>
+                <string>Sources/___PACKAGENAME___/templates/index.mustache</string>
               </array>
               
               <key>Definitions</key>
@@ -187,11 +188,22 @@ app.get("/answer") { _, res, _ in
 }
 
 app.get { req, res, _ in
-    let text = req.param("text") ?? "Schwifty"
-    res.send("Hello, \(text) world!")
+    res.render("index", [ 
+        "title" : "MicroExpress",
+        "text"  : req.param("text") ?? "Schwifty"
+    ])
 }
 
 app.listen(1337)</string>
+                <key>Sources/___PACKAGENAME___/templates/index.mustache</key>
+                <dict>
+                    <key>Group</key>
+                    <array>
+                        <string>Templates</string>
+                    </array>
+                    <key>Path</key>
+                    <string>index.mustache</string>
+                </dict>
               </dict>
             </dict>
           </array>
