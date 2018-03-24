@@ -32,6 +32,12 @@ uninstall : uninstall-templates uninstall-image
 
 lint : lint-templates
 
+
+resolve :
+	rm -rf Package.resolved
+	rm -rf .build
+	swift package resolve
+
 # image
 
 # SWIFT_XCODE_IMAGING=yes swift xcode build
