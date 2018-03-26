@@ -128,7 +128,7 @@
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIOSSL(url: "https://github.com/apple/swift-nio-ssl.git", 
-                 from: "1.0.0")</string>
+                 from: "1.0.1")</string>
                 <string>Package.swift:spmpackagedecl:targets:default:NIOOpenSSL</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIOOpenSSL</string>
               </array>
