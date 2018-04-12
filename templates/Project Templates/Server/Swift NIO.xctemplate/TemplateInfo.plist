@@ -47,7 +47,7 @@
     <key>Nodes</key>
     <array>
       <string>Package.swift:spmpackagedecl:deps:SwiftNIO(url: "https://github.com/apple/swift-nio.git", 
-                 from: "1.4.1")</string>
+                 from: "1.4.2")</string>
       <string>Package.swift:spmpackagedecl:targets:default:NIO</string>
       
       <string>Sources/___PACKAGENAME___/main.swift:imports:import:Foundation</string>
