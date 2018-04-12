@@ -209,6 +209,34 @@ app.listen(1337)</string>
           </array>
         </dict>
       </dict>
+      
+      <dict>
+        <key>Identifier</key>   <string>zzSwiftNIORedis</string>
+        <key>Name</key>         <string>Include the SwiftNIO Redis module.</string>
+        <key>Description</key>
+        <string>A Redis client, and protocol implementation.</string>
+        
+        <key>SortOrder</key>    <integer>21</integer>
+        <key>Type</key>         <string>checkbox</string>
+        <key>Default</key>      <string>false</string>
+        <key>NotPersisted</key> <true/>
+        
+        <key>Units</key>
+        <dict>
+          <key>true</key>
+          <array>
+            <dict>
+              <key>Nodes</key>
+              <array>
+                <string>Package.swift:spmpackagedecl:deps:SwiftNIORedis(url: "https://github.com/NozeIO/swift-nio-redis.git", 
+                 from: "0.8.0")</string>
+                <string>Package.swift:spmpackagedecl:targets:default:Redis</string>
+                <string>Sources/___PACKAGENAME___/main.swift:imports:import:Redis</string>
+              </array>
+            </dict>
+          </array>
+        </dict>
+      </dict>
     </array>
   </dict>
 </plist>

@@ -13,7 +13,9 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio-ssl.git", 
                  from: "1.0.0"),
         .package(url: "https://github.com/NozeIO/MicroExpress.git",
-                 .branch("branches/swift-nio-lib"))
+                 .branch("branches/swift-nio-lib")),
+        .package(url: "https://github.com/NozeIO/swift-nio-redis.git", 
+                 from: "0.8.0"),
     ],
     targets: [
         .target(name: "SwiftNIO_XcodeImage", 
@@ -23,7 +25,9 @@ let package = Package(
                     "NIO",
                     "NIOHTTP1",
                     "NIOOpenSSL",
-                    "MicroExpress"
+                    "MicroExpress",
+                    "NIORedis",
+                    "Redis"
                 ])
     ]
 )
