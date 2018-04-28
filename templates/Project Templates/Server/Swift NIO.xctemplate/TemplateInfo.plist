@@ -52,22 +52,20 @@
       
       <string>Sources/___PACKAGENAME___/main.swift:imports:import:Foundation</string>
       <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIO</string>
+      <string>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMainBefore</string>
       <string>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</string>
+      <string>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMainAfter</string>
     </array>
     
     
     <!-- ***************************************************** -->
-    <!-- TODO: indent, separate out common stuff -->
+
     <key>Definitions</key>
     <dict>
-      <!-- SwiftNIO stuff -->
-      
       <key>Sources/___PACKAGENAME___/main.swift</key>
-      <dict>
-        <key>Path</key><string>Sources/main.swift</string>
-      </dict>
+      <dict><key>Path</key><string>Sources/main.swift</string></dict>
       <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
-      <string></string> <!-- TODO: add nice boilerplate -->
+      <string></string>
     </dict>
 
 
@@ -75,6 +73,195 @@
 
     <key>Options</key>
     <array>
+      <dict>
+        <key>Identifier</key>   <string>zzSwiftNIOServerBoilerplate</string>
+        <key>Name</key>         <string>Generate Server Boilerplate.</string>
+        <key>Description</key>
+        <string>Generate the boilerplate for a SwiftNIO server.</string>
+        
+        <key>SortOrder</key>    <integer>5</integer>
+        <key>Type</key>         <string>checkbox</string>
+        <key>Default</key>      <string>true</string>
+        <key>NotPersisted</key> <true/>
+        
+        <key>Units</key>
+        <dict>
+          <key>true</key>
+          <array>
+            <dict>
+              <key>Nodes</key>
+              <array>
+                <string>Package.swift:spmpackagedecl:targets:default:NIOHTTP1</string>
+                <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIOHTTP1</string>
+              </array>
+              
+              <key>Definitions</key>
+              <dict>
+                <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
+                <string>// MARK: - The Connection Handler
+
+/// Our connection handler object. A new one is created per incoming TCP/IP
+/// connection.
+final class Handler : ChannelInboundHandler {
+  
+    /// This is the type of data the `channelRead` method receives from NIO.
+    typealias InboundIn = ByteBuffer
+  
+    /// This method is called when the connection receives data. The data is
+    /// passed in using the opaque `NIOAny` object, and needs to be unwrapped
+    /// before it can be used.
+    func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+        let bb = unwrapInboundIn(data)
+      
+        // This is where you would add your parsing / content handling code
+      
+        if let s = bb.getString(at: bb.readerIndex, length: bb.readableBytes) {
+            print("Got #\(bb.readableBytes) bytes:", s)
+        }
+        else {
+            print("Got #\(bb.readableBytes) bytes:", bb)
+        }
+      
+        // Echo back received data (Note: write only buffers, `flush` must be 
+        // called to actually send it to the socket).
+        ctx.write(data, promise: nil)
+    }
+  
+    /// This method is called when all incoming data has been processed. 
+    /// Depending on the protocol, this is a good time to flush all writes.
+    ///
+    /// Important: Only if you `flush`, data actually gets sent!
+    func channelReadComplete(ctx: ChannelHandlerContext) {
+        ctx.flush()
+    }
+  
+    /// This method is called if the socket is ready to be used. This can be 
+    /// used to setup processing state and is called before `channelRead` gets
+    /// called.
+    func channelActive(ctx: ChannelHandlerContext) {
+        print("Channel ready, client address:",
+              ctx.channel.remoteAddress?.description ?? "-")
+    }
+
+    /// This method is called if the socket is closed in a clean way, i.e. the
+    /// client disconnected.
+    func channelInactive(ctx: ChannelHandlerContext) {
+        print("Channel closed.", ObjectIdentifier(self))
+    }
+  
+    /// Called if an error happens. We just close the socket here.
+    func errorCaught(ctx: ChannelHandlerContext, error: Error) {
+        print("ERROR:", error)
+        ctx.close(promise: nil)
+    }
+}
+
+
+// MARK: - Server Setup Class
+
+/// The `Server` class wraps the boilerplate necessary to setup a NIO TCP/IP
+/// server.
+final class Server {
+  
+    struct Configuration {
+        var host           : String?         = nil
+        var port           : Int             = 1337
+        var backlog        : Int             = 256
+        var eventLoopGroup : EventLoopGroup? = nil
+    }
+  
+    let configuration  : Configuration
+    let eventLoopGroup : EventLoopGroup
+    var serverChannel  : Channel?
+  
+    init(configuration: Configuration = Configuration()) {
+        self.configuration  = configuration
+        self.eventLoopGroup = configuration.eventLoopGroup
+                    ?? MultiThreadedEventLoopGroup(numThreads: System.coreCount)
+    }
+  
+    func listenAndWait() {
+        listen()
+    
+        do    { try serverChannel?.closeFuture.wait() }
+        catch { print("ERROR: Failed to wait on server:", error) }
+    }
+
+    func listen() {
+        let bootstrap = makeBootstrap()
+    
+        do {
+            let address : SocketAddress
+        
+            if let host = configuration.host {
+                address = try SocketAddress
+                  .newAddressResolving(host: host, port: configuration.port)
+            }
+            else {
+                var addr = sockaddr_in()
+                addr.sin_port = in_port_t(configuration.port).bigEndian
+                address = SocketAddress(addr, host: "*")
+            }
+        
+            serverChannel = try bootstrap.bind(to: address).wait()
+        
+            if let addr = serverChannel?.localAddress {
+                print("Server running on:", addr)
+            }
+            else {
+                print("ERROR: server reported no local address?")
+            }
+        }
+        catch let error as NIO.IOError {
+            print("ERROR: failed to start server, errno:",
+                  error.errnoCode, "\n",
+                  error.localizedDescription)
+        }
+        catch {
+            print("ERROR: failed to start server:", type(of:error), error)
+        }
+    }
+  
+
+    // MARK: - Bootstrap
+  
+    func makeBootstrap() -> ServerBootstrap {
+        let reuseAddrOpt = ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET),
+                                                 SO_REUSEADDR)
+        let bootstrap = ServerBootstrap(group: eventLoopGroup)
+            // Specify backlog and enable SO_REUSEADDR for the server itself
+            .serverChannelOption(ChannelOptions.backlog,
+                                 value: Int32(configuration.backlog))
+            .serverChannelOption(reuseAddrOpt, value: 1)
+        
+            // Set the handlers that are applied to the accepted Channels
+            .childChannelInitializer { channel in
+                channel.pipeline
+                    .add(name: "___VARIABLE_productName:RFC1034Identifier___",
+                         handler: Handler())
+            }
+        
+            // Enable TCP_NODELAY and SO_REUSEADDR for the accepted Channels
+            .childChannelOption(ChannelOptions.socket(IPPROTO_TCP, TCP_NODELAY),
+                                value: 1)
+            .childChannelOption(reuseAddrOpt, value: 1)
+            .childChannelOption(ChannelOptions.maxMessagesPerRead, value: 1)
+    
+        return bootstrap
+    }
+}
+
+
+// MARK: - Start and run Server
+
+let server = Server()
+server.listenAndWait()</string>
+              </dict>
+            </dict>
+          </array>
+        </dict>
+      </dict>
+      
       <dict>
         <key>Identifier</key>   <string>zzSwiftNIOHTTP1</string>
         <key>Name</key>         <string>Include the SwiftNIO HTTP1 module.</string>
@@ -97,13 +284,200 @@
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIOHTTP1</string>
               </array>
               
-              <!-- Add a nice main boilerplate w/ HTTP support
               <key>Definitions</key>
               <dict>
                 <key>Sources/___PACKAGENAME___/main.swift:body:SwiftNIOMain</key>
-                <string></string>
-              </dict>
-                -->
+                <string>// MARK: - The HTTP Connection Handler
+
+/// Our connection handler object. A new one is created per incoming TCP/IP
+/// connection.
+/// Before data enters this handler, it is parsed by the NIOHTTP1 handler.
+/// Similarily, data written, goes to the NIOHTTP1 handler.
+final class Handler : ChannelInboundHandler {
+  
+    /// This is the type of data the `channelRead` method receives from the
+    /// HTTP handler - "request part" values (an enum).
+    typealias InboundIn   = HTTPServerRequestPart
+  
+    /// The type of data we write back to the HTTP handler.
+    typealias OutboundOut = HTTPServerResponsePart
+
+    /// This method is called when the HTTP parser receives data. The data is
+    /// passed in using the opaque `NIOAny` object, and needs to be unwrapped
+    /// before it can be used.
+    func channelRead(ctx: ChannelHandlerContext, data: NIOAny) {
+        let requestPart = unwrapInboundIn(data)
+      
+        // This is where you would add your request handling code
+      
+        switch requestPart {
+          
+        case .head(let requestHead):
+            // Called when the full HTTP header has been read. That is, we get
+            // the HTTP method, the URI and all the headers.
+            print("HTTP request:", requestHead.method, requestHead.uri)
+          
+            // Since we don't process any data, we can emit our response right
+            // away. First the head is written, then some body.
+            let responseHead =
+                    HTTPResponseHead(version: requestHead.version, status: .ok)
+            ctx.write(wrapOutboundOut(.head(responseHead)), promise: nil)
+            
+            var bodyData = ctx.channel.allocator.buffer(capacity: 64)
+            bodyData.write(staticString: "Hello World!")
+            ctx.write(wrapOutboundOut(.body(.byteBuffer(bodyData))),
+                      promise: nil)
+          
+        case .body(let bb):
+            // Incoming request body content can be processed here.
+          
+            if let s = bb.getString(at: bb.readerIndex,
+                                    length: bb.readableBytes)
+            {
+                print("Got #\(bb.readableBytes) bytes:", s)
+            }
+            else {
+                print("Got #\(bb.readableBytes) bytes:", bb)
+            }
+          
+        case .end:
+            ctx.write(wrapOutboundOut(.end(nil)), promise: nil)
+        }
+    }
+  
+    /// This method is called when all incoming data has been processed.
+    /// Depending on the protocol, this is a good time to flush all writes.
+    ///
+    /// Important: Only if you `flush`, data actually gets sent!
+    func channelReadComplete(ctx: ChannelHandlerContext) {
+        ctx.flush()
+    }
+  
+    /// This method is called if the socket is ready to be used. This can be
+    /// used to setup processing state and is called before any read is passed
+    /// on.
+    func channelActive(ctx: ChannelHandlerContext) {
+        print("Channel ready, client address:",
+              ctx.channel.remoteAddress?.description ?? "-")
+    }
+
+    /// This method is called if the socket is closed in a clean way, i.e. the
+    /// HTTP client disconnected.
+    func channelInactive(ctx: ChannelHandlerContext) {
+        print("Channel closed.", ObjectIdentifier(self))
+    }
+  
+    /// Called if an error happens. We just close the socket here.
+    func errorCaught(ctx: ChannelHandlerContext, error: Error) {
+        print("ERROR:", error)
+        ctx.close(promise: nil)
+    }
+}
+
+
+// MARK: - Server Setup Class
+
+/// The `Server` class wraps the boilerplate necessary to setup a NIO TCP/IP
+/// server.
+final class Server {
+  
+    struct Configuration {
+        var host           : String?         = nil
+        var port           : Int             = 1337
+        var backlog        : Int             = 256
+        var eventLoopGroup : EventLoopGroup? = nil
+    }
+  
+    let configuration  : Configuration
+    let eventLoopGroup : EventLoopGroup
+    var serverChannel  : Channel?
+  
+    init(configuration: Configuration = Configuration()) {
+        self.configuration  = configuration
+        self.eventLoopGroup = configuration.eventLoopGroup
+                      ?? MultiThreadedEventLoopGroup(numThreads: System.coreCount)
+    }
+  
+    func listenAndWait() {
+        listen()
+      
+        do    { try serverChannel?.closeFuture.wait() }
+        catch { print("ERROR: Failed to wait on server:", error) }
+    }
+
+    func listen() {
+        let bootstrap = makeBootstrap()
+      
+        do {
+            let address : SocketAddress
+          
+            if let host = configuration.host {
+                address = try SocketAddress
+                  .newAddressResolving(host: host, port: configuration.port)
+            }
+            else {
+                var addr = sockaddr_in()
+                addr.sin_port = in_port_t(configuration.port).bigEndian
+                address = SocketAddress(addr, host: "*")
+            }
+          
+            serverChannel = try bootstrap.bind(to: address).wait()
+          
+            if let addr = serverChannel?.localAddress {
+                print("Server running on:", addr)
+            }
+            else {
+                print("ERROR: server reported no local address?")
+            }
+        }
+        catch let error as NIO.IOError {
+            print("ERROR: failed to start server, errno:", error.errnoCode, "\n",
+                  error.localizedDescription)
+        }
+        catch {
+            print("ERROR: failed to start server:", type(of:error), error)
+        }
+    }
+  
+
+    // MARK: - Bootstrap
+  
+    func makeBootstrap() -> ServerBootstrap {
+        let reuseAddrOpt = ChannelOptions.socket(SocketOptionLevel(SOL_SOCKET),
+                                                 SO_REUSEADDR)
+        let bootstrap = ServerBootstrap(group: eventLoopGroup)
+            // Specify backlog and enable SO_REUSEADDR for the server itself
+            .serverChannelOption(ChannelOptions.backlog,
+                                 value: Int32(configuration.backlog))
+            .serverChannelOption(reuseAddrOpt, value: 1)
+          
+            // Set the handlers that are applied to the accepted Channels
+            .childChannelInitializer { channel in
+                channel.pipeline
+                    .configureHTTPServerPipeline(withErrorHandling: true)
+                    .then {
+                        channel.pipeline
+                            .add(name: "___VARIABLE_productName:RFC1034Identifier___",
+                                 handler: Handler())
+                    }
+            }
+          
+            // Enable TCP_NODELAY and SO_REUSEADDR for the accepted Channels
+            .childChannelOption(ChannelOptions.socket(IPPROTO_TCP, TCP_NODELAY),
+                                value: 1)
+            .childChannelOption(reuseAddrOpt, value: 1)
+            .childChannelOption(ChannelOptions.maxMessagesPerRead, value: 1)
+      
+        return bootstrap
+    }
+}
+
+
+// MARK: - Start and run Server
+
+let server = Server()
+server.listenAndWait()</string>
+                </dict>
             </dict>
           </array>
         </dict>
