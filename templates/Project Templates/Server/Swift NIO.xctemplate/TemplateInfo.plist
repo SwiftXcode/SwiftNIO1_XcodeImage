@@ -47,7 +47,7 @@
     <key>Nodes</key>
     <array>
       <string>Package.swift:spmpackagedecl:deps:SwiftNIO(url: "https://github.com/apple/swift-nio.git", 
-                 from: "1.5.0")</string>
+                 from: "1.6.1")</string>
       <string>Package.swift:spmpackagedecl:targets:default:NIO</string>
       
       <string>Sources/___PACKAGENAME___/main.swift:imports:import:Foundation</string>
@@ -603,9 +603,37 @@ app.listen(1337)</string>
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIORedis(url: "https://github.com/NozeIO/swift-nio-redis.git", 
-                 from: "0.8.0")</string>
+                 from: "0.8.3")</string>
                 <string>Package.swift:spmpackagedecl:targets:default:Redis</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:Redis</string>
+              </array>
+            </dict>
+          </array>
+        </dict>
+      </dict>
+      
+      <dict>
+        <key>Identifier</key>   <string>zzSwiftNIOIRC</string>
+        <key>Name</key>         <string>Include the SwiftNIO IRC module.</string>
+        <key>Description</key>
+        <string>A Internet Relay Chat client, and protocol implementation.</string>
+        
+        <key>SortOrder</key>    <integer>22</integer>
+        <key>Type</key>         <string>checkbox</string>
+        <key>Default</key>      <string>false</string>
+        <key>NotPersisted</key> <true/>
+        
+        <key>Units</key>
+        <dict>
+          <key>true</key>
+          <array>
+            <dict>
+              <key>Nodes</key>
+              <array>
+                <string>Package.swift:spmpackagedecl:deps:SwiftNIORedis(url: "https://github.com/NozeIO/swift-nio-irc.git", 
+                 from: "0.5.0")</string>
+                <string>Package.swift:spmpackagedecl:targets:default:IRC</string>
+                <string>Sources/___PACKAGENAME___/main.swift:imports:import:IRC</string>
               </array>
             </dict>
           </array>
