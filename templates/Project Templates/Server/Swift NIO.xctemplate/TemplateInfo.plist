@@ -47,7 +47,7 @@
     <key>Nodes</key>
     <array>
       <string>Package.swift:spmpackagedecl:deps:SwiftNIO(url: "https://github.com/apple/swift-nio.git", 
-                 from: "1.7.2")</string>
+                 from: "1.8.0")</string>
       <string>Package.swift:spmpackagedecl:targets:default:NIO</string>
       
       <string>Sources/___PACKAGENAME___/main.swift:imports:import:Foundation</string>
@@ -281,6 +281,16 @@ server.listenAndWait()</string>
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:targets:default:NIOHTTP1</string>
+              </array>
+            </dict>
+            <dict>
+              <key>RequiredOptions</key>
+              <dict>
+                  <key>zzSwiftNIOServerBoilerplate</key>
+                  <string>true</string>
+              </dict>
+              <key>Nodes</key>
+              <array>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:NIOHTTP1</string>
               </array>
               
