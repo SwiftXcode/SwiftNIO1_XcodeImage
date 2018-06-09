@@ -177,7 +177,7 @@ final class Server {
     init(configuration: Configuration = Configuration()) {
         self.configuration  = configuration
         self.eventLoopGroup = configuration.eventLoopGroup
-                    ?? MultiThreadedEventLoopGroup(numThreads: System.coreCount)
+               ?? MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
     }
   
     func listenAndWait() {
@@ -405,7 +405,7 @@ final class Server {
     init(configuration: Configuration = Configuration()) {
         self.configuration  = configuration
         self.eventLoopGroup = configuration.eventLoopGroup
-                      ?? MultiThreadedEventLoopGroup(numThreads: System.coreCount)
+               ?? MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
     }
   
     func listenAndWait() {
