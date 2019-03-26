@@ -549,7 +549,7 @@ server.listenAndWait()</string>
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIOMicroExpress(url: "https://github.com/NozeIO/MicroExpress.git",
-                 from: "0.4.5")</string>
+                 "0.4.5"..<"0.5.0")</string>
                 <string>Package.swift:spmpackagedecl:targets:default:MicroExpress</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:MicroExpress</string>
                 <string>Sources/___PACKAGENAME___/templates/index.mustache</string>

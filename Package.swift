@@ -13,7 +13,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-nio-ssl.git", 
                  from: "1.4.0"),
         .package(url: "https://github.com/NozeIO/MicroExpress.git",
-                 from: "0.4.8"),
+                 "0.4.0"..<"0.5.0"),
         .package(url: "https://github.com/SwiftNIOExtras/swift-nio-redis.git",
                  from: "0.9.0"),
         .package(url: "https://github.com/SwiftNIOExtras/swift-nio-irc.git",
