@@ -15,13 +15,13 @@ let package = Package(
         .package(url: "https://github.com/NozeIO/MicroExpress.git",
                  "0.4.0"..<"0.5.0"),
         .package(url: "https://github.com/SwiftNIOExtras/swift-nio-redis.git",
-                 from: "0.9.0"),
+                 "0.9.0"..<"0.10.0"),
         .package(url: "https://github.com/SwiftNIOExtras/swift-nio-irc.git",
-                 from: "0.6.2"),
+                 "0.6.2"..<"0.7.0"),
         .package(url: "https://github.com/NozeIO/swift-nio-redis-client.git",
-                 from: "0.9.0"),
+                 "0.9.0"..<"0.10.0"),
         .package(url: "https://github.com/NozeIO/swift-nio-irc-client.git",
-                 from: "0.6.1")
+                 "0.6.1"..<"0.7.0")
     ],
     targets: [
         .target(name: "SwiftNIO_XcodeImage", 
