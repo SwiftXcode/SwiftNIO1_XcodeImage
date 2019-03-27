@@ -641,7 +641,7 @@ app.listen(1337)</string>
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIOIRC(url: "https://github.com/NozeIO/swift-nio-irc-client.git", 
-                 from: "0.6.2"..<"0.7.0")</string>
+                 "0.6.2"..<"0.7.0")</string>
                 <string>Package.swift:spmpackagedecl:targets:default:IRC</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:IRC</string>
               </array>
