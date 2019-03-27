@@ -1,12 +1,12 @@
 # Makefile
-# Copyright © 2018 ZeeZide GmbH. All rights reserved.
+# Copyright © 2018-2019 ZeeZide GmbH. All rights reserved.
 
 include config.make
 
-PACKAGE = SwiftNIO
+PACKAGE = SwiftNIO1
 MAJOR=0
-MINOR=8
-SUBMINOR=0
+MINOR=9
+SUBMINOR=7
 
 PACKAGE_TARBALL_NAME=$(PACKAGE)-$(MAJOR).$(MINOR).$(SUBMINOR).image
 PACKAGE_TARBALL_LATEST=$(PACKAGE).image
