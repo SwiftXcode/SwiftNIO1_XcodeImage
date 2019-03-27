@@ -1,4 +1,4 @@
-<h2>SwiftXcode Image for Swift NIO
+<h2>SwiftXcode Image for Swift NIO 1 (Swift 4)
   <img src="http://zeezide.com/img/SwiftXcodePkgIcon.svg"
        align="right" width="128" height="128" />
 </h2>
@@ -9,7 +9,11 @@
 [![homebrew](https://img.shields.io/homebrew/v/cake.svg)](https://github.com/SwiftXcode/homebrew-swiftxcode)
 
 SwiftXcode image for
-[Swift NIO](https://github.com/apple/swift-nio).
+[Swift NIO 1](https://github.com/apple/swift-nio).
+
+*Note*: For Swift 5 and NIO 2 checkout the
+[SwiftNIO 2 Image](https://github.com/SwiftXcode/SwiftNIO2_XcodeImage).
+This image is tied to NIO 1, even when compiling with a Swift 5 compiler.
 
 Swift NIO is a cross-platform asynchronous event-driven network application 
 framework for rapid development of maintainable high performance protocol 
@@ -18,10 +22,10 @@ It's like Netty written in Swift.
 
 Check the main project for details: [SwiftXcode](https://SwiftXcode.github.io).
 
-### Install Swift NIO Image
+### Install Swift NIO 1 Image
 
 ```shell
-brew install swiftxcode/swiftxcode/swift-xcode-nio
+brew install swiftxcode/swiftxcode/swift-xcode-nio1
 swift xcode link-templates # <-- important!
 ```
 
