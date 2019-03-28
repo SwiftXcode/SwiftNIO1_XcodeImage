@@ -549,7 +549,7 @@ server.listenAndWait()</string>
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIOMicroExpress(url: "https://github.com/NozeIO/MicroExpress.git",
-                 "0.4.5"..<"0.5.0")</string>
+                 "0.4.5"..&lt;"0.5.0")</string>
                 <string>Package.swift:spmpackagedecl:targets:default:MicroExpress</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:MicroExpress</string>
                 <string>Sources/___PACKAGENAME___/templates/index.mustache</string>
@@ -613,7 +613,7 @@ app.listen(1337)</string>
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIORedis(url: "https://github.com/NozeIO/swift-nio-redis-client.git", 
-                 "0.9.0"..<"0.10.0")</string>
+                 "0.9.0"..&lt;"0.10.0")</string>
                 <string>Package.swift:spmpackagedecl:targets:default:Redis</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:Redis</string>
               </array>
@@ -641,7 +641,7 @@ app.listen(1337)</string>
               <key>Nodes</key>
               <array>
                 <string>Package.swift:spmpackagedecl:deps:SwiftNIOIRC(url: "https://github.com/NozeIO/swift-nio-irc-client.git", 
-                 "0.6.2"..<"0.7.0")</string>
+                 "0.6.2"..&lt;"0.7.0")</string>
                 <string>Package.swift:spmpackagedecl:targets:default:IRC</string>
                 <string>Sources/___PACKAGENAME___/main.swift:imports:import:IRC</string>
               </array>
