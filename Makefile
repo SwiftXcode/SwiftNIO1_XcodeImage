@@ -66,7 +66,7 @@ make-abi-install-dir :
 #   with spaces in Makefiles ;-)
 
 lint-templates :
-	$(XML_LINTER) $(PROJECT_SERVER_TEMPLATES_DIR)/Swift\ NIO.xctemplate/TemplateInfo.plist
+	$(XML_LINTER) $(PROJECT_SERVER_TEMPLATES_DIR)/Swift\ NIO\ 1.xctemplate/TemplateInfo.plist
 
 install-templates : lint-templates \
 	install-project-server-templates	\
@@ -82,12 +82,12 @@ uninstall-templates : \
 install-project-server-templates : uninstall-project-server-templates
 	$(MKDIR_P) $(XCODE_TEMPLATE_PROJECT_SERVER_SOURCE_DIR)
 	$(INSTALL_R) \
-		$(PROJECT_SERVER_TEMPLATES_DIR)/Swift\ NIO.xctemplate \
+		$(PROJECT_SERVER_TEMPLATES_DIR)/Swift\ NIO\ 1.xctemplate \
 		$(XCODE_TEMPLATE_PROJECT_SERVER_SOURCE_DIR)/
 
 uninstall-project-server-templates :
 	$(UNINSTALL_R) \
-		$(XCODE_TEMPLATE_PROJECT_SERVER_SOURCE_DIR)/Swift\ NIO.xctemplate
+		$(XCODE_TEMPLATE_PROJECT_SERVER_SOURCE_DIR)/Swift\ NIO\ 1.xctemplate
 
 install-file-server-templates : uninstall-file-server-templates
 
